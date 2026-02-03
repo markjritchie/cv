@@ -11,8 +11,9 @@ public class CurriculumVitaeController(ILogger<CurriculumVitaeController> logger
 
 
     [HttpGet]
-    public async Task<CurriculumVitae[]> Get(CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(CurriculumVitae[]), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
-      return await curriculumVitaeQueries.GetAll(cancellationToken);   
+      return Ok(await curriculumVitaeQueries.GetAll(cancellationToken));   
     }
 }

@@ -2,6 +2,7 @@ using System.Text.Json;
 using CvApi.Queries;
 using Microsoft.Extensions.AI;
 using Scalar.AspNetCore;
+using Microsoft.AspNetCore.OpenApi;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
@@ -15,11 +16,11 @@ services.AddControllers().AddJsonOptions(options => {
 services.AddOpenApi();
 
 services.AddScoped<ICurriculumVitaeQueries, CurriculumVitaeQueries>();
-IChatClient client =
-    new OpenAI.Chat.ChatClient("gpt-4o-mini", Environment.GetEnvironmentVariable("OPENAI_API_KEY"))
-    .AsIChatClient();
+//IChatClient client =
+//    new OpenAI.Chat.ChatClient("gpt-4o-mini", Environment.GetEnvironmentVariable("OPENAI_API_KEY"))
+ //   .AsIChatClient();
 
-services.AddSingleton(client);
+//services.AddSingleton(client);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,7 +29,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
-
 
 
 app.UseHttpsRedirection();
