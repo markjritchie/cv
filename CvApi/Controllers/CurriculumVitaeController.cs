@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CvApi.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +11,8 @@ public class CurriculumVitaeController(ILogger<CurriculumVitaeController> logger
 
 
     [HttpGet]
-    public CurriculumVitae[] Get()
+    public async Task<CurriculumVitae[]> Get(CancellationToken cancellationToken)
     {
-      return curriculumVitaeQueries.GetAll();   
+      return await curriculumVitaeQueries.GetAll(cancellationToken);   
     }
 }
